@@ -1,0 +1,72 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+int main () {
+    int idade, solteiros=0, casados=0, viuvos=0, divorciados=0, idadeViuvos=0, pessoas=0;
+    float mediaViuvos, porcentagemDivorciados;
+    char estadocivil;
+
+do {
+    cout<<"Digite sua idade: ";
+    cin>>idade;
+
+    if (idade>=0) {
+    do {
+    cout<<"Digite seu estado civil (S, C, V ou D): ";
+    cin>>estadocivil;
+
+    if (estadocivil != 'S' && estadocivil != 'C'
+        && estadocivil != 'V' && estadocivil != 'D') 
+        {
+            cout<<"Estado civil invalido!"<<"\n";
+        }
+
+if (estadocivil == 'C')
+{
+    casados++;
+}
+else if (estadocivil == 'S') //checar pq eh else
+{
+    solteiros++;
+}
+else if (estadocivil == 'V')
+{
+    viuvos++;
+    idadeViuvos=idadeViuvos+idade;
+}
+else {
+    divorciados++;
+}
+
+    }
+    while (estadocivil != 'S' && estadocivil != 'C'
+    && estadocivil != 'V' && estadocivil != 'D');
+    }
+}
+while (idade>0);
+
+pessoas=solteiros+casados+viuvos+divorciados;
+
+cout<<"Quantidade de casados: "<<casados<<endl;
+cout<<"Quantidade de solteiros: "<<solteiros<<endl;
+
+if(viuvos>0) {
+    mediaViuvos = idadeViuvos/ (float) viuvos;
+    cout<<"A media de viuvos eh: "<<mediaViuvos<<endl;
+}
+else {
+    cout<<"Nao foram registrados viuvos."<<"\n";
+}
+
+if(divorciados>0)
+{
+    porcentagemDivorciados=divorciados*100.0/pessoas;
+    cout<<"A porcentagem de pessoas divorciadas eh de: "<<porcentagemDivorciados<<'%';
+}
+else {
+    cout<<"Nao foram registrados divorciados.";
+}
+
+return 0;
+}

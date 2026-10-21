@@ -1,41 +1,38 @@
 #include <iostream>
 
 int main () {
-    int matrizA[2][2] {
-        {2, 4},
-        {6, 8}
+    int A[2][2] {
+        {1, 2},
+        {3, 4}
     };
 
-    int matrizB[2][2] {
-        {3, 6},
-        {9, 12}
+    int B[2][2] {
+        {2, 5},
+        {6, 3}
     };
 
-    int matrizMulti[2][2];
+    int result[2][2];
 
-    for (int i=0; i<2; i++) { //CONTA AS LINHAS DA MATRIZ.
-        for (int j=0; j<2; j++) { // CONTA AS COLUNAS DA MATRIZ
+    for(int i=0; i<2; i++) {
+        for(int j=0; j<2; j++) {
 
-            matrizMulti[i][j]=matrizA[i][j] * matrizB[i][j];
+            result[i][j]=0; // como nossa matriz resultante está sendo ACUMULATIVA, igualamos ela a zero no começo dos for "básicos"
+                            // para que ela não carregue resultados de repetições anteriores.
 
-            std::cout<<matrizMulti[i][j]<<" ";
+            for(int k=0; k<2; k++) { 
+                
+    // K será nossa variavel auxiliar, pois a mult de matrizes funciona da seguinte forma: 
+    // Coor 0,0 de ambas matrizes se multiplicam, após, na matriz um anda uma coluna pro lado (0,1) e na dois uma para baixo (1.0) 
+    //para realizar a multiplicacao, e por ultimo, os resultados somam. ASSIM COM AS OUTRAS.
 
-        }
-        std::cout<< std::endl;
+    //   K andará ou com a linha (i) ou com a coluna (j), sendo assim matrizes a e b, respectivamente. COMO:
+
+                result[i][j] += A[i][k] * B[k][j]; //result = result + a * b (versao simplificada para compreensao)
+
     }
-
-    //                  ^^^
-    // NO LAÇO DO FOR, acontecerá a multiplicacão das matrizes, ou seja: 
-    //PRIMEIRA: pegará o i(linha)=0 e o j(coluna)=0, ou seja, nossas coordenadas seráo 0,0. 
-        //OLHANDO PARA A MATRIZ:
-            //    0  1
-            // 0 (2, 4)         ENTÃO, O PRIMEIRO NUMERO DA MATRIZ A SERÁ 2
-            // 1 (6, 8)
-    //SEGUNDA: pegará o i(linha)=0 (pois ainda estamos dentro do segundo for) e o j(coluna)=1 (aumentou), ou seja, nossas coordenadas
-    // são: 0,1. 
-    //TERCEIRA: agora a linha for da coluna acaba, pois o j deve ser menor que 2, ou seja, voltamos para o for das linhas, QUE É 
-    // ADIOCIONADO MAIS 1, ou seja, nossas coordenadas são i=1, e como passaremos pelo j como se fosse uma primeira vez, j=0.
-    //QUARTA: por ultimo, o j aumenta mais um. (1,1)
-
-    return 0;
+    std::cout<<result[i][j]<<" "; //DEMONSTRA OS RESULTADOS DO PROGRAMA, importante estar dentro das chaves do for da linha e da coluna.
+}
+std::cout<<std::endl; //Quando chega no fim do for das linhas, pula uma linha para ir da linha 0 a 1 e prosseguir o calculo da matriz.
+}
+return 0;
 }
